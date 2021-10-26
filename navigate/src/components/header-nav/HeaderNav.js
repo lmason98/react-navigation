@@ -1,27 +1,30 @@
 // Included
 import { BrowserRouter, Link } from 'react-router-dom';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 
 function HeaderNav() {
   return (
     <div className="Header-nav">
-      <Navbar bg="dark" variant="dark">
-        <BrowserRouter>
-          <Container>
-            <Navbar.Brand href="/">Home</Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-collapse">
-              <Nav className="mr-auto">
-                <Nav.Link href="/content2"></Nav.Link>
-                <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-                  <NavDropdown.Item href="/content3">Content 3</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/content4">Content 4</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </BrowserRouter>
+      <Navbar style={{backgroundColor: '#444d58'}} variant="dark">
+        <Container>
+          <Link className="navbar-brand" to="/">Home</Link>
+          <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-collapse">
+            <Nav className="mr-auto">
+              <NavItem href="/content2"><Nav.Link as={Link} to="/content2">Content 2</Nav.Link></NavItem>
+              <Link className="nav-link" to="/content2">Content 2</Link>
+              <Link className="nav-link" to="/content3">Content 3</Link>
+              <Link className="nav-link" to="/content4">Content 4</Link>
+              <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
+                <Link className="dropdown-item" to="/content2">Content 2</Link>
+                <Link className="dropdown-item" to="/content3">Content 3</Link>
+                <NavDropdown.Divider />
+                <Link className="dropdown-item" to="/content4">Content 4</Link>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
     </div>
   );

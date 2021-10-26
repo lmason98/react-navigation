@@ -1,7 +1,7 @@
 
 function Footer() {
   return (
-    <div>
+    <div className="footer">
       Blah
     </div>
   );
@@ -9,7 +9,7 @@ function Footer() {
 
 function SideFooter() {
   return (
-    <div>
+    <div className="side-footer">
       Side blah
     </div>
   );

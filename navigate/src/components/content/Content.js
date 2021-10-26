@@ -1,4 +1,5 @@
 import './Content.css';
+import { withRouter } from 'react-router-dom';
 
 import { ButtonGroup, Card, Breadcrumb } from 'react-bootstrap';
 
@@ -32,6 +33,8 @@ function ContentWrapper({title, breadcrumb, content}) {
 *  - toggleNav: Button
 * */
 function Home({toggleNav}) {
+  console.log('Home')
+
   const breadcrumb =
     <Breadcrumb>
       <Breadcrumb.Item active>Home</Breadcrumb.Item>
@@ -60,6 +63,8 @@ function Home({toggleNav}) {
 }
 
 function Content2() {
+  console.log('CONTENT 2!')
+
   const breadcrumb =
     <Breadcrumb>
       <Breadcrumb.Item active>Content 2</Breadcrumb.Item>
@@ -79,6 +84,7 @@ function Content2() {
 }
 
 function Content3() {
+  console.log('CONTENT 3!')
   const breadcrumb =
     <Breadcrumb>
       <Breadcrumb.Item active>Content 3</Breadcrumb.Item>
@@ -98,6 +104,7 @@ function Content3() {
 }
 
 function Content4() {
+  console.log('CONTENT 4!')
   const breadcrumb =
     <Breadcrumb>
       <Breadcrumb.Item active>Content 4</Breadcrumb.Item>
@@ -116,4 +123,7 @@ function Content4() {
                          content={body}/>;
 }
 
-export {Home, Content2, Content3, Content4};
+export const HomeWR = withRouter(Home);
+export const Content2WR = withRouter(Content2);
+export const Content3WR = withRouter(Content3);
+export const Content4WR = withRouter(Content4);
