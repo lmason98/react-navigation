@@ -1,4 +1,5 @@
-function sideNav() {
+
+function SideNav() {
   return (
     <div className="side-nav">
       <h1>Side Nav</h1>
@@ -6,4 +7,4 @@ function sideNav() {
   );
 }
 
-export default sideNav;
+export default SideNav;

@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 // react navigation app entry point
