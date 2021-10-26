@@ -1,9 +1,9 @@
 .content-div {
     width: 80%;
     margin: 1rem auto 1rem auto;
-    background-color: red;
 }
 
 .main-div {
-    background-color: rgb(229, 245, 255);
+    background-color: rgb(234, 243, 255);
+    height: 100%;
 }
