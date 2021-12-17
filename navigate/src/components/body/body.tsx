@@ -1,5 +1,10 @@
-import react, { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
+import { Routes, Route } from 'react-router-dom';
+
 import './body.css';
+
+import Dash from '../dash/dash';
+import Molding from '../molding/molding';
 
 /*
 * Name: Body
@@ -8,7 +13,10 @@ import './body.css';
 const Body: FunctionComponent = () => {
   return (
     <div className="body-div">
-      <h1>Body div</h1>
+      <Routes>
+        <Route path="/" element={<Dash />} />
+        <Route path="/molding" element={<Molding />} />
+      </Routes>
     </div>
   );
 }

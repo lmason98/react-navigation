@@ -1,4 +1,4 @@
-import react, { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import './footer.css';
 
 /*
@@ -7,8 +7,8 @@ import './footer.css';
 * */
 const Footer: FunctionComponent = () => {
   return (
-    <div className="footer-div">
-      <h1>Footer div</h1>
+    <div className="footer-div bg-dark">
+      <p>RotoEdgePro&trade;</p>
     </div>
   );
 }
