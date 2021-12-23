@@ -3,10 +3,6 @@
   padding: 0 !important;
 }
 
-body > #root > div {
-  height: calc(100vh - 30px);
-}
-
 body {
   margin: 0 !important;
   padding: 0 !important;

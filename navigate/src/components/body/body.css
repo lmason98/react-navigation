@@ -1,5 +1,9 @@
-
 .body-div {
   padding-top: 80px !important;
   margin: 0 auto !important;
 }
+
+body > #root > div {
+  height: calc(100vh - 30px);
+}
+
