@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
-import { Typography as Text } from '@material-ui/core';
+import { Typography as Text, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 
 /**
  * Header comp
@@ -8,9 +9,13 @@ import { Typography as Text } from '@material-ui/core';
  */
 const Header: FunctionComponent = () => {
   return (
-    <>
-      <Text variant='h2'>Header</Text>
-    </>
+    <AppBar position='static'>
+      <Toolbar>
+        <IconButton size='medium' edge='start' color='inherit' aria-label='menu' title='Display menu'>
+          <Menu />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 }
 
