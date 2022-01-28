@@ -1,9 +1,17 @@
+// React imports
 import React, { FunctionComponent, useState } from 'react';
-
+// MUI imports
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+// Custom imports
 import Login from '../login/login';
 import Header from '../header/header';
-import Body from '../body/body';
-import Footer from '../footer/footer';
+
+const theme = createTheme();
+// const theme = createTheme({
+//   palette: {
+//     mode: 'dark',
+//   }
+// });
 
 /**
  * Main comp
@@ -14,11 +22,9 @@ const Main: FunctionComponent = () => {
 
   if (authed)  // if user is authed, return normal content
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <Header />
-        <Body />
-        <Footer />
-      </>
+      </ThemeProvider>
     );
   else  // otherwise return Login page
     return <Login onLoginSuccess={() => setAuthed(true)} />;
