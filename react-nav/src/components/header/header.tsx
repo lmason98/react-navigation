@@ -106,99 +106,137 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 // ============================================================================================ end copy pasta
 
+interface NavigationProps {
+  openDrawer: () => void;
+}
+
 /**
- *
+ * The sidebar navigation comp
+ * @param openDrawer opens the parent component drawer
  * @constructor
  */
-const Navigation: FunctionComponent = () => {
+const Navigation: FunctionComponent<NavigationProps> = ({openDrawer}) => {
   const [loadingOpen, setLoadingOpen] = useState<boolean>(false);
   const [moldingOpen, setMoldingOpen] = useState<boolean>(false);
   const [secondaryOpen, setSecondaryOpen] = useState<boolean>(false);
   const [foamingOpen, setFoamingOpen] = useState<boolean>(false);
   const [assemblyOpen, setAssemblyOpen] = useState<boolean>(false);
   const [shippingOpen, setShippingOpen] = useState<boolean>(false);
+  const [reportingOpen, setReportingOpen] = useState<boolean>(false);
+  const [schedulingOpen, setSchedulingOpen] = useState<boolean>(false);
+  const [managementOpen, setManagementOpen] = useState<boolean>(false);
+  const [servicesOpen, setServicesOpen] = useState<boolean>(false);
+
+  const toggleFunc = (toggle: (val: boolean) => void, val: boolean) => {
+    // if toggling open, open the drawer as well
+    if (!val) openDrawer();
+    toggle(!val);
+  }
 
   const navListProcessing: any = [
-    {name: 'Arm Loading', icon: <Input />, links: [1, 2, 3, 4], toggle: () => setLoadingOpen(!loadingOpen),
-      isOpen: loadingOpen},
-    {name: 'Molding', icon: <Cached />, links: [1, 2, 3, 4], toggle: () => setMoldingOpen(!moldingOpen),
-      isOpen: moldingOpen},
-    {name: 'Secondary', icon: <EngineeringIcon />, links: [1, 2, 3, 4], toggle: () => setSecondaryOpen(!secondaryOpen),
-      isOpen: secondaryOpen},
-    {name: 'Foaming', icon: <BubbleChart />, links: [1, 2, 3, 4], toggle: () => setFoamingOpen(!foamingOpen),
-      isOpen: foamingOpen},
-    {name: 'Assembly', icon: <Build />, links: [1, 2, 3, 4], toggle: () => setAssemblyOpen(!assemblyOpen),
-      isOpen: assemblyOpen},
-    {name: 'Shipping', icon: <LocalShipping />, links: [1, 2, 3, 4], toggle: () => setShippingOpen(!shippingOpen),
-      isOpen: shippingOpen},
+    {
+      name: 'Arm Loading',
+      icon: <Input />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setLoadingOpen, loadingOpen),
+      isOpen: loadingOpen
+    },
+    {
+      name: 'Molding',
+      icon: <Cached />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setMoldingOpen, moldingOpen),
+      isOpen: moldingOpen
+    },
+    {
+      name: 'Secondary',
+      icon: <EngineeringIcon />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setSecondaryOpen, secondaryOpen),
+      isOpen: secondaryOpen
+    },
+    {
+      name: 'Foaming',
+      icon: <BubbleChart />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setFoamingOpen, foamingOpen),
+      isOpen: foamingOpen
+    },
+    {
+      name: 'Assembly',
+      icon: <Build />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setAssemblyOpen, assemblyOpen),
+      isOpen: assemblyOpen
+    },
+    {
+      name: 'Shipping',
+      icon: <LocalShipping />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setShippingOpen, shippingOpen),
+      isOpen: shippingOpen
+    },
   ];
   const navListManagement: any = [
-    {name: 'Reporting', icon: <Summarize />, links: [1, 2, 3, 4], open: false},
-    {name: 'Scheduling', icon: <EventNote />, links: [1, 2, 3, 4], open: false},
-    {name: 'Management', icon: <People />, links: [1, 2, 3, 4], open: false},
-    {name: 'Services', icon: <AdminPanelSettings />, links: [1, 2, 3, 4], open: false}
+    {
+      name: 'Reporting',
+      icon: <Summarize />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setReportingOpen, reportingOpen),
+      isOpen: reportingOpen
+    },
+    {
+      name: 'Scheduling',
+      icon: <EventNote />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setSchedulingOpen, schedulingOpen),
+      isOpen: schedulingOpen
+    },
+    {
+      name: 'Management',
+      icon: <People />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setManagementOpen, managementOpen),
+      isOpen: managementOpen
+    },
+    {
+      name: 'Services',
+      icon: <AdminPanelSettings />,
+      links: [1, 2, 3, 4],
+      toggle: () => toggleFunc(setServicesOpen, servicesOpen),
+      isOpen: servicesOpen
+    }
   ]
-
-  const getOpen = (navName: string): boolean => {
-    let open: boolean = false;
-
-    for (const nav of [...navListProcessing, ...navListManagement])
-      if (nav.name === navName)
-        open = nav.open;
-
-    return open;
-  }
-
-  const setOpen = (navName: string, open: boolean) => {
-    for (const nav of [...navListProcessing, ...navListManagement])
-      if (nav.name === navName) {
-        nav.open = open;
-      }
-  }
 
   return (
     <List>
-      {navListProcessing.map((nav: any) => (
-        <>
-          <ListItem button onClick={() => nav.toggle()} key={nav.name}>
-            <ListItemIcon>
-              {nav.icon}
-            </ListItemIcon>
-            <ListItemText primary={nav.name} />
-            {getOpen(nav.name) ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={nav.isOpen} timeout='auto' unmountOnExit>
-            <List component='div' disablePadding>
-              {nav.links.map((link: any) => (
-                <ListItem button key={link}>
-                  <ListItemText primary={link} />
+      {[navListProcessing, navListManagement].map((navList: any) => {
+        return (
+          <>
+            {navList.map((nav: any) => (
+              <>
+                <ListItem button onClick={() => nav.toggle()} key={`${nav.name}-1`}>
+                  <ListItemIcon>
+                    {nav.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={nav.name} />
+                  {nav.isOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </>
-      ))}
-      <Divider />
-      {navListManagement.map((nav: any) => (
-        <>
-          <ListItemButton onClick={() => setOpen(nav.name, !getOpen(nav.name))} key={nav.name}>
-            <ListItemIcon>
-              {nav.icon}
-            </ListItemIcon>
-            <ListItemText primary={nav.name} />
-            {getOpen(nav.name) ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={getOpen(nav.name)} timeout='auto' unmountOnExit>
-            <List component='div' disablePadding>
-              {nav.links.map((link: any) => (
-                <ListItem button key={link}>
-                  <ListItemText primary={link} />
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </>
-      ))}
+                <Collapse in={nav.isOpen} timeout='auto' unmountOnExit key={`${nav.name}-2`}>
+                  <List component='div' disablePadding>
+                    {nav.links.map((link: any) => (
+                      <ListItem button key={link}>
+                        <ListItemText primary={link} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
+            ))}
+          <Divider />
+          </>
+        )
+      })}
     </List>
   );
 }
@@ -298,7 +336,7 @@ const Header: FunctionComponent = () => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Navigation />
+        <Navigation openDrawer={() => setDrawerOpen(true)}/>
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
